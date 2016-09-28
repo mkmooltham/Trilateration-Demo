@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+<h1>Positioning Algorithm</h1>
+
+<p id="question">what are the circles?</p>
+
+<table style="width:100%">
+	<tr>
+		<th>
+			<p>Circle A (
+				<input id="a_x" type="number" style="width: 35px;" value="150" onchange="inputCircle()">
+				<input id="a_y" type="number" style="width: 35px;" value="150" onchange="inputCircle()">
+				<input id="a_r" type="number" style="width: 35px;" value="150" onchange="inputCircle()">
+				)
+			</p>
+		</th>
+		<th>
+			<p>Circle B (
+				<input id="b_x" type="number" style="width: 35px;" value="300" onchange="inputCircle()">
+				<input id="b_y" type="number" style="width: 35px;"value="150" onchange="inputCircle()">
+				<input id="b_r" type="number" style="width: 35px;" value="150" onchange="inputCircle()">
+				)
+			</p>
+		</th>
+		<th>
+			<p>Circle C (
+				<input id="c_x" type="number" style="width: 35px;" value="225" onchange="inputCircle()">
+				<input id="c_y" type="number" style="width: 35px;" value="280" onchange="inputCircle()">
+				<input id="c_r" type="number" style="width: 35px;" value="150" onchange="inputCircle()">
+				)
+			</p>
+		</th>
+	</tr>
+</table>
+
+<table style="width:100%">
+	<tr>
+		<input type="submit" value="Draw Circle" onclick="inputCircle()"/>
+		<button type="button" onclick="randomCircle()">Random Circle</button>
+		<button type="button" onclick="enlargeRadius()">Enlarge Radius</button>
+		<button type="button" onclick="inputTangent()">Tangent</button>
+		<button type="button" onclick="inputIncentre()">Incentre</button>
+		<button type="button" onclick="inputCentroid()">Centroid</button>
+		<button type="button" onclick="inputOrthocentre()">Orthocentre</button>
+		<button type="button" onclick="clearDrawing()">Clear</button>
+		<form action="">
+		<input type="checkbox" id="autoClear" value="true" checked>auto clear<br>
+		</form>
+	</tr>
+	<tr>
+		<p> Sensor erro range
+			<input id="err_range" type="number" style="width: 35px;" value="20" onchange="updateErrorDis()">
+		</p>
+		<button type="button" onclick="randomLocation()">Random Location</button>
+		<button type="button" onclick="calLocation()">Calculate Location</button>
+		<button type="button" onclick="analysis()">Analysis</button>
+	</tr>
+</table>
+
+<p id="answer_circle">please input data</p>
+<p id="answer_tangent"> </p>
+<p id="answer_analysis"> </p>
+
+<canvas id="myCanvas" width="1300" height="500" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<p id="answer_analysislist"> </p>
+
+<script src="jsLearn.js"></script>
+</body>
+</html>
