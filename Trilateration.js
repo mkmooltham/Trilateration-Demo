@@ -6,15 +6,26 @@ var mToPiRatio = (width_pixel/width_meter+depth_pixel/depth_meter)/2; // meter t
 var movingRange_A = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var movingRange_B = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var movingRange_C = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var idKey = { 
+	'0': { x:0, y:0 }, 
+	'1': { x:0, y:depth_pixel },
+	'2': { x:width_pixel, y:depth_pixel/2 },
+    '0117C5314649': { x:311, y:200 }, //Simon
+    '0117C533BAC6': { x:0, y:400 }, //Jack
+    '0117C5310411': { x:0, y:0 }, //O gor
+    '0117C596DBEE': { x:0, y:0 } //YunZi
+};
 
-function userPosition(ax=0,ay=200,ar=15,bx=311,by=0,br=15,cx=311,cy=400,cr=15){
+
+//Main Function
+function userPosition(aid='0',ar=15,bid='1',br=15,cid='2',cr=15){
 	ar = netRadius(ar, movingRange_A);
 	br = netRadius(br, movingRange_B);
 	cr = netRadius(cr, movingRange_C);
 
-	var circ_A = new Circ("a",ax,ay,ar);
-	var circ_B = new Circ("b",bx,by,br);
-	var circ_C = new Circ("c",cx,cy,cr);
+	var circ_A = new Circ("a",idKey[aid]['x'],idKey[aid]['y'],ar);
+	var circ_B = new Circ("b",idKey[bid]['x'],idKey[bid]['y'],br);
+	var circ_C = new Circ("c",idKey[cid]['x'],idKey[cid]['y'],cr);
 
 	var Bisec_AB = calBisectPoint(circ_A, circ_B);
 	var Bisec_BC = calBisectPoint(circ_B, circ_C);
@@ -161,9 +172,19 @@ function rangeAverage(a, movingRange){
 	return averge;
 }
 
+//ID matching
+function idMatching(id){
+
+}
+
 
 //Calibration
 function changeHeight(a){
  height = a;
 }
 
+function clearRange(){
+	movingRange_A = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	movingRange_B = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	movingRange_C = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+}
