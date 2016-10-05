@@ -100,6 +100,11 @@ function calLocation(){
 
     result = "; Detected location ( "+parseInt(v.x)+" , "+parseInt(v.y)+" ) Error Distance = "+parseInt(distFromPts(u,v));
     document.getElementById("answer_tangent").innerHTML += result;
+
+    v = calCentroid(tang_1,tang_2,tang_3);
+    drawPoint(v,"purple");
+    v = calIncentre(tang_1,tang_2,tang_3);
+    drawPoint(v,"green");
 }
 
 function randomLocation(){
@@ -271,18 +276,10 @@ function calTangent(circ_A, circ_B, tang){
 
 function calIncentre(tang1, tang2, tang3){
 	var incentre = new PointLine("Incentre",0,0,0);
-	incentre.x = (distFromPts(tang2,tang3)*tang1.x+
-			distFromPts(tang1,tang3)*tang2.x+
-			distFromPts(tang1,tang2)*tang3.x)/
-			(distFromPts(tang2,tang3)+
-			distFromPts(tang1,tang3)+
-			distFromPts(tang1,tang2));
-	incentre.y = (distFromPts(tang2,tang3)*tang1.y+
-			distFromPts(tang1,tang3)*tang2.y+
-			distFromPts(tang1,tang2)*tang3.y)/
-			(distFromPts(tang2,tang3)+
-			distFromPts(tang1,tang3)+
-			distFromPts(tang1,tang2));
+	incentre.x = (distFromPts(tang2,tang3)*tang1.x+distFromPts(tang1,tang3)*tang2.x+distFromPts(tang1,tang2)*tang3.x)/
+			(distFromPts(tang2,tang3)+distFromPts(tang1,tang3)+distFromPts(tang1,tang2));
+	incentre.y = (distFromPts(tang2,tang3)*tang1.y+distFromPts(tang1,tang3)*tang2.y+distFromPts(tang1,tang2)*tang3.y)/
+				(distFromPts(tang2,tang3)+distFromPts(tang1,tang3)+distFromPts(tang1,tang2));
 	return incentre;
 }
 
