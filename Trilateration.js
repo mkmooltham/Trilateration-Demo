@@ -15,10 +15,52 @@ var idKey = {
     '0117C5310411': { x:0, y:0 }, //O gor
     '0117C596DBEE': { x:0, y:0 } //YunZi
 };
+var referencePoint = [
+	{"x":30,"y":370},
+	{"x":30,"y":340},
+	{"x":30,"y":310},
+	{"x":30,"y":280},
+	{"x":30,"y":250},
+	{"x":30,"y":220},
+	{"x":30,"y":190},
+	{"x":30,"y":160},
+	{"x":30,"y":130},
+	{"x":30,"y":100},
+	{"x":30,"y":70},
+	{"x":30,"y":40},
+	{"x":30,"y":10},
+	{"x":90,"y":370},
+	{"x":90,"y":340},
+	{"x":90,"y":310},
+	{"x":90,"y":280},
+	{"x":90,"y":250},
+	{"x":90,"y":220},
+	{"x":90,"y":190},
+	{"x":90,"y":160},
+	{"x":90,"y":130},
+	{"x":90,"y":100},
+	{"x":90,"y":70},
+	{"x":90,"y":40},
+	{"x":90,"y":10},
+	{"x":150,"y":370},
+	{"x":150,"y":340},
+	{"x":150,"y":310},
+	{"x":150,"y":280},
+	{"x":150,"y":250},
+	{"x":150,"y":220},
+	{"x":150,"y":190},
+	{"x":150,"y":160},
+	{"x":150,"y":130},
+	{"x":150,"y":100},
+	{"x":150,"y":70},
+	{"x":150,"y":40},
+	{"x":150,"y":10}
+];
 
 
 //Main Function
 function userPosition(aid='0',ar=15,bid='1',br=15,cid='2',cr=15){
+	alert("Testing");
 	ar = netRadius(ar, movingRange_A);
 	br = netRadius(br, movingRange_B);
 	cr = netRadius(cr, movingRange_C);
@@ -32,6 +74,7 @@ function userPosition(aid='0',ar=15,bid='1',br=15,cid='2',cr=15){
 	var Bisec_AC = calBisectPoint(circ_A, circ_C);
 	
 	var cal_V = calOrthocentre(Bisec_AB, Bisec_BC, Bisec_AC);
+	cal_V = findNearestReferencePoint(cal_V);
 	return cal_V;
 }
 
@@ -71,6 +114,10 @@ function sq(a){
 
 function sqrt(a){
 	return Math.sqrt(a);
+}
+
+function distFromPts(a, b){
+	return sqrt( sq(a.x-b.x)+sq(a.y-b.y) );
 }
 
 function solveQuadEqua(a,b,c,ans){
@@ -130,7 +177,7 @@ function calOrthocentre(Bisect1, Bisect2, Bisect3){
 	return orthocentre;
 }
 
-//Preporcessing
+//Pre-porcessing
 function netRadius(a, movingRange){
 	a = removeHeightVector(a);
 	a = meterToPixel(a);
@@ -172,9 +219,20 @@ function rangeAverage(a, movingRange){
 	return averge;
 }
 
-//ID matching
-function idMatching(id){
+//Pro-processing
+function findNearestReferencePoint(a){
+	var minPoint = new Point(""+0,referencePoint[0]['x'],referencePoint[0]['0']);
 
+	for (var i = 0; i < referencePoint.length; i++) {
+		var rfpoint = new Point(""+i,referencePoint[i]['x'],referencePoint[i]['y']);
+		
+		if(distFromPts(a,rfpoint)<distFromPts(a,minPoint)){
+			minPoint = rfpoint;
+		}
+	};
+
+	a = minPoint;
+	return a;
 }
 
 
